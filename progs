@@ -77,11 +77,11 @@ N2
 
 int main(int argc, char *argv[])
 {
- char buff[16], buff_[16];
- printf("What is your name? ");
- gets(buff);
- sprintf(buff_ , "Hello, %s", buff);
- printf(buff_);
- return 0;
+char buff[16];
+     printf("What is your name? ");
+     gets(buff);
+     printf("Hello, ");
+     printf(buff);
+     return 0;
 }
 
