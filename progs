@@ -1,0 +1,87 @@
+N1
+
+// ПЕРЕПОЛНЕНИЕ БУФЕРА Уязвимый код
+#include <QCoreApplication>
+#include <iostream>
+#include <conio.h>
+#include <math.h>
+using namespace std;
+int main()
+{
+    double  P=0,Lmed=0,sigma[3]={3,4,5},R[3][6];
+    int a=0,Hl=10,Lmax=80,h=4;
+
+    for (int i=0;i<3;i++)
+    {
+    for (int L=20;L<Lmax;L=L+Hl)
+    {
+        Lmed = (L - a)/2;
+        double S=0;
+        for (double x=a; x<=L; x=x+h){
+
+    S= ((1/ sigma[i]*sqrt(2*3.14)))*exp((-pow((x-Lmed),2))/(2*pow(sigma[i],2)));
+    P=P+S;
+    }
+    P = h*P/2;
+    R[i][L] = 1-P;
+    cout << R[i][L]<<"  "; //Выходим за границу массива
+    }
+    cout<<"\n";
+    }
+    _getch ();
+}
+
+
+
+
+
+
+
+// исправленная уязвимость, теперь не выходим за границу массива
+#include <QCoreApplication>
+#include <iostream>
+#include <conio.h>
+#include <math.h>
+using namespace std;
+int main(){
+    double  P=0,Lmed=0,sigma[3]={3,4,5},R[3][6];
+    int a=0,Hl=10,Lmax=80,h=4;
+
+    for (int i=0;i<3;i++)
+    {
+    for (int k=0;k<6;k++)
+    {
+    for (int L=20;L<Lmax;L=L+Hl){
+        Lmed = (L - a)/2;
+        double S=0;
+        for (double x=a; x<=L; x=x+h){
+
+    S= ((1/ sigma[i]*sqrt(2*3.14)))*exp((-pow((x-Lmed),2))/(2*pow(sigma[i],2)));
+    P=P+S;
+    }
+    P = h*P/2;
+    R[i][k] = 1-P;
+    }
+    cout << R[i][k]<<"  ";
+
+    }
+    cout<<"\n";
+    }
+    _getch ();}
+    
+    
+N2
+
+//Форматные строки
+#include <QCoreApplication>
+
+int main(int argc, char *argv[])
+{
+ char buff[16], buff_[16];
+ printf("What is your name? ");
+ gets(buff);
+ sprintf(buff_ , "Hello, %s", buff);
+ printf(buff_);
+ return 0;
+}
+
